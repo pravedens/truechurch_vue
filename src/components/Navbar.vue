@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router';
+</script>
+
 <template>
     <div>
         <nav class="bg-gray-800">
@@ -14,31 +18,36 @@
                   <div class="hidden md:block">
                     <div class="flex items-baseline ml-10 space-x-4">
                       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                      <a
-                        href="#"
-                        class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md"
+                      <RouterLink
+                        to="/"
+                        exactActiveClass="bg-gray-900"
+                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                         aria-current="page"
-                        >Dashboard</a
+                        >Главная</RouterLink
                       >
-                      <a
-                        href="#"
+                      <RouterLink
+                        to="post"
+                        exactActiveClass="bg-gray-900"
                         class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                        >Team</a
+                        >Проповеди</RouterLink
                       >
-                      <a
-                        href="#"
+                      <RouterLink
+                        to="about"
+                        exactActiveClass="bg-gray-900"
                         class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                        >Projects</a
+                        >О нас</RouterLink
                       >
-                      <a
-                        href="#"
+                      <RouterLink
+                        to="event"
+                        exactActiveClass="bg-gray-900"
                         class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                        >Calendar</a
+                        >События</RouterLink
                       >
-                      <a
-                        href="#"
+                      <RouterLink
+                        to="portfolio"
+                        exactActiveClass="bg-gray-900"
                         class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                        >Reports</a
+                        >Галерея</RouterLink
                       >
                     </div>
                   </div>
