@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Category />
+        <Category @filterPost="isFilter" />
 
         <ListPosts :dataPost="posts"/>
 
@@ -16,11 +16,19 @@ import { onMounted, ref } from "vue";
   
   const posts = ref([]);
   
-  onMounted(() => {
-    axios
+  onMounted( async () => {
+    await axios
       .get("posts")
       //.then(resp => console.log(resp))
       .then((resp) => (posts.value = resp.data.data.data))
       .catch((err) => console.log(err));
   });
+
+  const isFilter = async (id) => {
+    await axios
+      .get("posts?category="+id)
+      //.then(resp => console.log(resp))
+      .then((resp) => (posts.value = resp.data.data.data))
+      .catch((err) => console.log(err));
+  }
 </script>

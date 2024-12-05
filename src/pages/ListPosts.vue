@@ -17,7 +17,7 @@
               <p class="text-gray-500">{{ post.created_at }}</p>
               <p
                 href="#"
-                class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
               >
                 Категория
               </p>
@@ -260,7 +260,7 @@
 import { ref } from "vue";
 
 defineProps({
-  dataPost: Array,
+  dataPost: Object,
 });
 
 const isVisible = ref(false);
