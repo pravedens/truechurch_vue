@@ -89,7 +89,7 @@ const isOpen = ref(false);
 
 const categories = ref([]);
 
-const isActive = ref("");
+const isActive = ref('');
 
 onMounted(() => {
   isActive.value = null;

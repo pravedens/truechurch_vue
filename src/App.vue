@@ -5,7 +5,7 @@
     <!-- End Navbar -->
 
     <!-- Header -->
-    <Header />
+    <Header @search="handleSearch"/>
     <!-- End Header -->
      
     <main>
@@ -26,4 +26,14 @@ import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import { RouterView } from "vue-router";
+
+import { provide, ref } from 'vue';
+
+const emitData = ref('');
+
+const handleSearch = (data) => {
+  emitData.value = data;
+}
+
+provide('headerSearch', emitData);
 </script>
