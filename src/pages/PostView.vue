@@ -16,6 +16,7 @@
         <Category @filterPost="isFilter" />
         <Conference @filterPost="conferenceFilter" />
         <Group @filterPost="groupFilter" />
+
         <!--</div>-->
         <!--</div>-->
       </div>
@@ -31,6 +32,7 @@ import Category from "../components/Category.vue";
 import ListPosts from "./ListPosts.vue";
 import Conference from "../components/Conference.vue";
 import Group from "../components/Group.vue";
+import Header from "../components/Header.vue";
 
 import { onMounted, ref, inject, watch } from "vue";
 import axios from "axios";
