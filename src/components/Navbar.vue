@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { ref, onUnmounted, onMounted } from "vue";
+import { userAuthStore } from "../stores/authStore";
+
+const authStore = userAuthStore();
 
 const userDropdown = ref(false);
 
@@ -107,7 +110,7 @@ onUnmounted(() => {
 
               <!-- Profile dropdown -->
               <div class="relative ml-3">
-                <div>
+                <div class="flex gap-2">
                   <button
                     @click="toggleDropdown"
                     type="button"
@@ -124,6 +127,7 @@ onUnmounted(() => {
                       alt=""
                     />
                   </button>
+                  <div class="mt-1 ml-2 text-gray-300">{{ authStore.user }}</div>
                 </div>
 
                 <!--
