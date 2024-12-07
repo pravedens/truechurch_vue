@@ -20,6 +20,10 @@ const routes = [
   { path: "/about", name: "About", component: () => import("../pages/AboutView.vue") },
 
   { path: "/portfolio", name: "Portfolio", component: () => import("../pages/PortfolioView.vue") },
+
+  { path: "/login", name: "Login", component: () => import("../pages/Auth/Login.vue") },
+
+  { path: "/register", name: "Register", component: () => import("../pages/Auth/Register.vue") },
 ];
 
 const router = createRouter({

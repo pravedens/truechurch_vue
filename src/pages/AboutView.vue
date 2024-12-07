@@ -2,6 +2,7 @@
     <div>
        <h1>О нас</h1>
        <button class="p-2 bg-green-400" @click="authStore.changeUser('Admin')">Change</button>
+       {{ authStore.user.name }}
     </div>
 </template>
 

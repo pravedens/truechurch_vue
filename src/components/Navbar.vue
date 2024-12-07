@@ -110,24 +110,48 @@ onUnmounted(() => {
 
               <!-- Profile dropdown -->
               <div class="relative ml-3">
-                <div class="flex gap-2">
-                  <button
-                    @click="toggleDropdown"
-                    type="button"
-                    class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">Open user menu</span>
-                    <img
-                      class="rounded-full size-8"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </button>
-                  <div class="mt-1 ml-2 text-gray-300">{{ authStore.user }}</div>
+                <div v-if="authStore.isLoggin">
+                  <div class="flex gap-2">
+                    <button
+                      @click="toggleDropdown"
+                      type="button"
+                      class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      id="user-menu-button"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    >
+                      <span class="absolute -inset-1.5"></span>
+                      <span class="sr-only">Open user menu</span>
+                      <img
+                        class="rounded-full size-8"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </button>
+                    <div class="mt-1 ml-2 text-gray-300">{{ authStore.user.name }}</div>
+                  </div>
+                </div>
+                <div v-else>
+                  <RouterLink to="login">
+                  <div class="flex gap-2">
+                    <button
+                      type="button"
+                      class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      id="user-menu-button"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    >
+                      <span class="absolute -inset-1.5"></span>
+                      <span class="sr-only">Open user menu</span>
+                      <img
+                        class="rounded-full size-8"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </button>
+                    <div class="mt-1 ml-2 text-gray-300">Вход</div>
+                  </div>
+                </RouterLink>
                 </div>
 
                 <!--
