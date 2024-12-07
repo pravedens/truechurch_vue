@@ -16,7 +16,7 @@
         <Category @filterPost="isFilter" />
         <Conference @filterPost="conferenceFilter" />
         <Group @filterPost="groupFilter" />
-
+        <SearchPost @search="handleSearch"/>
         <!--</div>-->
         <!--</div>-->
       </div>
@@ -32,9 +32,9 @@ import Category from "../components/Category.vue";
 import ListPosts from "./ListPosts.vue";
 import Conference from "../components/Conference.vue";
 import Group from "../components/Group.vue";
-import Header from "../components/Header.vue";
+import SearchPost from "../components/SearchPost.vue";
 
-import { onMounted, ref, inject, watch } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 
 const posts = ref([]);
@@ -71,13 +71,11 @@ const groupFilter = async (id) => {
     .catch((err) => console.log(err));
 };
 
-const headerData = inject("headerSearch");
-
-watch(headerData, async (value) => {
+const handleSearch = async (value) => {
   await axios
     .get("posts?search=" + value)
     //.then(resp => console.log(resp))
     .then((resp) => (posts.value = resp.data.data.data))
     .catch((err) => console.log(err));
-});
+};
 </script>

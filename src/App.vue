@@ -4,10 +4,7 @@
     <Navbar />
     <!-- End Navbar -->
 
-    <Header @search="handleSearch"/>
-     
     <main>
-
       <!-- ListPost -->
       <RouterView />
       <!-- End ListPost -->
@@ -22,15 +19,7 @@
 <script setup>
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
-import Header from "./components/Header.vue";
+import Header from "./components/SearchPost.vue";
 import { RouterView } from "vue-router";
-import { provide, ref } from 'vue';
 
-const emitData = ref('');
-
-const handleSearch = (data) => {
-  emitData.value = data;
-}
-
-provide('headerSearch', emitData);
 </script>
