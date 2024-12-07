@@ -6,8 +6,6 @@ const userDropdown = ref(false);
 
 const isMobileMenuVisible = ref(false);
 
-const mobilMenu = ref(true);
-
 const toggleMobileMenu = (event) => {
   event.stopPropagation();
   isMobileMenuVisible.value = !isMobileMenuVisible.value;

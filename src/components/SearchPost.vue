@@ -1,9 +1,9 @@
 <template>
-  <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="relative mt-2">
     <input
       v-model="search"
       type="text"
-      class="p-1 mt-1 bg-blue-300 border-2 border-gray-300 rounded-lg placeholder-slate-600"
+      class="mt-6 py-1.5 grid w-full grid-cols-1 pl-3 pr-2 text-left text-gray-900 bg-white rounded-md cursor-default outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
       placeholder="Поиск"
     />
   </div>
