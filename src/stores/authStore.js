@@ -4,16 +4,23 @@ import axios from 'axios'
 
 export const userAuthStore = defineStore('authStore', () => {
     const user = ref({})
-    const token = ref('');
+    const token = ref(sessionStorage.getItem('token') ?? null);
 
     const saveToken = (newToken) => {
         token.value = newToken;
+        sessionStorage.setItem('token', newToken);
+    }
+
+    const clearToken = () => {
+        token.value = null;
+        user.value = null;
+        sessionStorage.clear();
     }
 
     const getUser = () => {
         axios.get('user')
             .then(resp => {
-                user.value = resp.data.data.data;
+                user.value = resp.data.data;
             })
             .catch(err => console.log(err))
     }
@@ -24,5 +31,5 @@ export const userAuthStore = defineStore('authStore', () => {
         user.value = name;
     }
   
-    return { user, isLoggin, changeUser, saveToken, getUser, token }
+    return { user, isLoggin, changeUser, saveToken, getUser, token, clearToken }
   })
