@@ -50,7 +50,7 @@ const getDataPost = async (number = null) => {
   if(idCategory.value) url = url+'&category='+idCategory.value;
   if(idConference.value) url = url+'&conference='+idConference.value;
   if(idGroup.value) url = url+'&group='+idGroup.value;
-  await axios
+   await axios
     .get(url)
     //.then(resp => console.log(resp))
     .then(resp => posts.value = resp.data.data)

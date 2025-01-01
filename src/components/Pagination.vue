@@ -67,12 +67,13 @@
 </template>
 
 <script setup>
+
 defineProps({
   data: Object,
-  functPost: Function,
+  functPost: Function
 });
 
-function cleanLabel(label) {
+function cleanLabel (label) {
   return String(label)
     .replace(/pagination.previous/g, "«")
     .replace(/pagination.next/g, "»")

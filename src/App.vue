@@ -19,7 +19,6 @@
 <script setup>
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
-import Header from "./components/SearchPost.vue";
 import { RouterView } from "vue-router";
 
 </script>

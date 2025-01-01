@@ -4,7 +4,7 @@
       <div
         class="max-w-2xl px-4 py-4 mx-auto sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8"
       >
-        <div
+        <div v-if="dataPost.data?.length > 0"
           class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
         >
           <a
@@ -20,7 +20,7 @@
               <p
                 class="rounded-full px-3 py-1.5 text-lg font-medium text-gray-600 hover:bg-gray-100"
               >
-                Категория
+                {{ post.category_id }}
               </p>
             </div>
 
@@ -38,21 +38,21 @@
               </h3>
             </div>
           </a>
-
           <!-- More products... -->
         </div>
+        <div v-else class="text-center">
+          <span>Нет данных</span>
+        </div>
       </div>
-      <!--<div v-else class="text-center">
-        <span>Нет данных</span>
-      </div>-->
     </div>
-
-    <Pagination
-      v-if="dataPost.data"
+    <div>
+      <Pagination
+      v-if="dataPost.data?.length > 0"
       :data="dataPost"
-      @page="getPost"
       :functPost="funcGetDataPost"
     />
+
+    </div>
 
     <!-- Modal -->
     <div
@@ -212,7 +212,7 @@ import Pagination from "../components/Pagination.vue";
 
 defineProps({
   dataPost: Object,
-  funcGetDataPost: Function,
+  funcGetDataPost: Function
 });
 
 const isVisible = ref(false);
