@@ -1,3 +1,46 @@
+<script setup>
+import { onMounted, ref, defineEmits, onUnmounted } from "vue";
+import axios from "axios";
+
+const emit = defineEmits(["filterPostGroup"]);
+
+const groups = ref([]);
+
+const isActive = ref("");
+
+onMounted(() => {
+  isActive.value = null;
+  axios
+    .get("groups")
+    .then((resp) => (groups.value = resp.data.data.data))
+    .catch((err) => console.log(err));
+});
+
+const filter = (id, index) => {
+  isActive.value = index;
+  emit("filterPostGroup", id);
+};
+
+const groupDropdown = ref(false);
+
+const dropdownGroup = (event) => {
+  event.stopPropagation();
+  groupDropdown.value = !groupDropdown.value;
+};
+
+const groupClickDropdown = () => {
+  if (groupDropdown.value) groupDropdown.value = false;
+};
+
+onMounted(() => {
+  document.addEventListener("click", groupClickDropdown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", groupClickDropdown);
+});
+</script>
+
 <template>
   <div>
     <label id="listbox-label" class="block font-medium text-gray-900 text-sm/6"
@@ -95,46 +138,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { onMounted, ref, defineEmits, onUnmounted } from "vue";
-import axios from "axios";
-
-const emit = defineEmits(["filterPost"]);
-
-const groups = ref([]);
-
-const isActive = ref("");
-
-onMounted(() => {
-  isActive.value = null;
-  axios
-    .get("groups")
-    .then((resp) => (groups.value = resp.data.data.data))
-    .catch((err) => console.log(err));
-});
-
-const filter = (id, index) => {
-  isActive.value = index;
-  emit("filterPost", id);
-};
-
-const groupDropdown = ref(false);
-
-const dropdownGroup = (event) => {
-  event.stopPropagation();
-  groupDropdown.value = !groupDropdown.value;
-};
-
-const groupClickDropdown = () => {
-  if (groupDropdown.value) groupDropdown.value = false;
-};
-
-onMounted(() => {
-  document.addEventListener("click", groupClickDropdown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("click", groupClickDropdown);
-});
-</script>

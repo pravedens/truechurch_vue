@@ -1,8 +1,52 @@
+<script setup>
+import { onMounted, ref, defineEmits, onUnmounted } from "vue";
+import axios from "axios";
+
+const emit = defineEmits(["filterPost"]);
+
+const categories = ref([]);
+
+const isActive = ref("");
+
+onMounted(() => {
+  isActive.value = null;
+  axios
+    .get("categories")
+    .then((resp) => (categories.value = resp.data.data.data))
+    .catch((err) => console.log(err));
+});
+
+const filter = (id, index) => {
+  isActive.value = index;
+  emit("filterPost", id);
+};
+
+const categoryDropdown = ref(false);
+
+const dropdownCategory = (event) => {
+  event.stopPropagation();
+  categoryDropdown.value = !categoryDropdown.value;
+};
+
+const categoryClickDropdown = () => {
+  if (categoryDropdown.value) categoryDropdown.value = false;
+};
+
+onMounted(() => {
+  document.addEventListener("click", categoryClickDropdown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", categoryClickDropdown);
+});
+</script>
+
 <template>
   <div>
     <label id="listbox-label" class="block font-medium text-gray-900 text-sm/6"
       >Спикеры</label
     >
+    
     <div class="relative mt-2">
       <button
         @click="dropdownCategory"
@@ -105,46 +149,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { onMounted, ref, defineEmits, onUnmounted } from "vue";
-import axios from "axios";
-
-const emit = defineEmits(["filterPost"]);
-
-const categories = ref([]);
-
-const isActive = ref("");
-
-onMounted(() => {
-  isActive.value = null;
-  axios
-    .get("categories")
-    .then((resp) => (categories.value = resp.data.data.data))
-    .catch((err) => console.log(err));
-});
-
-const filter = (id, index) => {
-  isActive.value = index;
-  emit("filterPost", id);
-};
-
-const categoryDropdown = ref(false);
-
-const dropdownCategory = (event) => {
-  event.stopPropagation();
-  categoryDropdown.value = !categoryDropdown.value;
-};
-
-const categoryClickDropdown = () => {
-  if (categoryDropdown.value) categoryDropdown.value = false;
-};
-
-onMounted(() => {
-  document.addEventListener("click", categoryClickDropdown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("click", categoryClickDropdown);
-});
-</script>

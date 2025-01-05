@@ -1,8 +1,33 @@
+<script setup>
+defineProps({
+  data: Object,
+  functPost: Function,
+});
+
+function cleanLabel(label) {
+  return String(label)
+    .replace(/pagination.previous/g, "«")
+    .replace(/pagination.next/g, "»")
+    .trim();
+}
+
+function getNumber(url) {
+  // Parse URL
+  const urlObj = new URL(url);
+
+  // Get value "page"
+  const page = urlObj.searchParams.get("page");
+
+  return page;
+}
+</script>
+
 <template>
   <div class="flex justify-center p-2 mt-10 bg-gray-400">
     <!-- Pagination -->
     <nav class="flex items-center gap-x-1" aria-label="Pagination">
-      <button @click="functPost(getNumber(data.prev_page_url))"
+      <button
+        @click="functPost(getNumber(data.prev_page_url))"
         v-if="data.prev_page_url"
         type="button"
         class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
@@ -39,7 +64,8 @@
           ></button>
         </span>
       </div>
-      <button @click="functPost(getNumber(data.next_page_url))"
+      <button
+        @click="functPost(getNumber(data.next_page_url))"
         v-if="data.next_page_url"
         type="button"
         class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
@@ -65,28 +91,3 @@
     <!-- End Pagination -->
   </div>
 </template>
-
-<script setup>
-
-defineProps({
-  data: Object,
-  functPost: Function
-});
-
-function cleanLabel (label) {
-  return String(label)
-    .replace(/pagination.previous/g, "«")
-    .replace(/pagination.next/g, "»")
-    .trim();
-}
-
-function getNumber(url){
-  // Parse URL
-  const urlObj = new URL(url);
-  
-  // Get value "page"
-  const page = urlObj.searchParams.get("page");
-
-  return page;
-}
-</script>

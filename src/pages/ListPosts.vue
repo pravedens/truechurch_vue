@@ -1,3 +1,25 @@
+<script setup>
+import { ref } from "vue";
+import Pagination from "../components/Pagination.vue";
+
+const props = defineProps({
+  dataPost: Object,
+  funcGetDataPost: Function
+});
+
+const isVisible = ref(false);
+const dataModal = ref("");
+
+const showModal = (post) => {
+  isVisible.value = true;
+  dataModal.value = post;
+};
+
+const close = () => {
+  isVisible.value = false;
+};
+</script>
+
 <template>
   <div>
     <div class="bg-white">
@@ -18,7 +40,7 @@
             >
               <p class="text-lg font-bold text-gray-800">{{ post.postDate }}</p>
               <p
-                class="rounded-full px-3 py-1.5 text-lg font-medium text-gray-600 hover:bg-gray-100"
+                class="rounded-full px-3 py-1.5 text-lg font-medium text-red-500 hover:bg-gray-100"
               >
                 {{ post.category_id }}
               </p>
@@ -47,7 +69,7 @@
     </div>
     <div>
       <Pagination
-      v-if="dataPost.data?.length > 0"
+      v-if="dataPost.links?.length > 3"
       :data="dataPost"
       :functPost="funcGetDataPost"
     />
@@ -205,27 +227,5 @@
     <!-- End Modal -->
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Pagination from "../components/Pagination.vue";
-
-defineProps({
-  dataPost: Object,
-  funcGetDataPost: Function
-});
-
-const isVisible = ref(false);
-const dataModal = ref("");
-
-const showModal = (post) => {
-  isVisible.value = true;
-  dataModal.value = post;
-};
-
-const close = () => {
-  isVisible.value = false;
-};
-</script>
 
 <style></style>

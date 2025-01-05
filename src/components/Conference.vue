@@ -1,3 +1,46 @@
+<script setup>
+import { onMounted, ref, defineEmits, onUnmounted } from "vue";
+import axios from "axios";
+
+const emit = defineEmits(["filterPostConference"]);
+
+const conferences = ref([]);
+
+const isActive = ref("");
+
+onMounted(() => {
+  isActive.value = null;
+  axios
+    .get("conferences")
+    .then((resp) => (conferences.value = resp.data.data.data))
+    .catch((err) => console.log(err));
+});
+
+const filterConf = (id, index) => {
+  isActive.value = index;
+  emit("filterPostConference", id);
+};
+
+const conferenceDropdown = ref(false);
+
+const dropdownConference = (event) => {
+  event.stopPropagation();
+  conferenceDropdown.value = !conferenceDropdown.value;
+};
+
+const conferenceClickDropdown = () => {
+  if (conferenceDropdown.value) conferenceDropdown.value = false;
+};
+
+onMounted(() => {
+  document.addEventListener("click", conferenceClickDropdown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", conferenceClickDropdown);
+});
+</script>
+
 <template>
   <div>
     <label id="listbox-label" class="block font-medium text-gray-900 text-sm/6"
@@ -61,7 +104,7 @@
           id="listbox-option-0"
           role="option"
         >
-          <div @click="filter(item.id, index)" class="flex items-center">
+          <div @click="filterConf(item.id, index)" class="flex items-center">
             <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
             <span class="block ml-3 font-normal truncate">{{ item.title }}</span>
           </div>
@@ -95,46 +138,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { onMounted, ref, defineEmits, onUnmounted } from "vue";
-import axios from "axios";
-
-const emit = defineEmits(["filterPost"]);
-
-const conferences = ref([]);
-
-const isActive = ref("");
-
-onMounted(() => {
-  isActive.value = null;
-  axios
-    .get("conferences")
-    .then((resp) => (conferences.value = resp.data.data.data))
-    .catch((err) => console.log(err));
-});
-
-const filter = (id, index) => {
-  isActive.value = index;
-  emit("filterPost", id);
-};
-
-const conferenceDropdown = ref(false);
-
-const dropdownConference = (event) => {
-  event.stopPropagation();
-  conferenceDropdown.value = !conferenceDropdown.value;
-};
-
-const conferenceClickDropdown = () => {
-  if (conferenceDropdown.value) conferenceDropdown.value = false;
-};
-
-onMounted(() => {
-  document.addEventListener("click", conferenceClickDropdown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("click", conferenceClickDropdown);
-});
-</script>

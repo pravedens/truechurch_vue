@@ -1,32 +1,3 @@
-<template>
-  <div>
-    <div class="px-6 mx-auto max-w-7xl lg:px-8">
-      <p
-        class="mt-2 text-4xl font-semibold tracking-tight text-center text-gray-900 text-pretty sm:text-5xl lg:text-balance"
-      >
-        Проповеди
-      </p>
-
-      <div
-        class="grid max-w-2xl grid-cols-2 pt-6 mx-auto mt-4 gap-x-4 gap-y-8 sm:mt-8 sm:pt-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-      >
-        <!--<div class="py-4 g-white sm:py-8">-->
-        <!--<div class="px-6 mx-auto max-w-7xl lg:px-8">-->
-        <!--<div class="max-w-2xl mx-auto lg:text-center">-->
-
-        <Category @filterPost="isFilter" />
-        <Conference @filterPost="conferenceFilter" />
-        <Group @filterPost="groupFilter" />
-        <SearchPost @search="handleSearch" />
-        <!--</div>-->
-        <!--</div>-->
-      </div>
-      <!--</div>-->
-    </div>
-    <ListPosts :dataPost="posts" :funcGetDataPost=getDataPost />
-  </div>
-</template>
-
 <script setup>
 import Category from "../components/Category.vue";
 import ListPosts from "./ListPosts.vue";
@@ -92,3 +63,32 @@ const handleSearch = async (value) => {
     .catch((err) => console.log(err));
 };
 </script>
+
+<template>
+  <div>
+    <div class="px-6 mx-auto max-w-7xl lg:px-8">
+      <p
+        class="mt-2 text-4xl font-semibold tracking-tight text-center text-gray-900 text-pretty sm:text-5xl lg:text-balance"
+      >
+        Проповеди
+      </p>
+
+      <div
+        class="grid max-w-2xl grid-cols-2 pt-6 mx-auto mt-4 gap-x-4 gap-y-8 sm:mt-8 sm:pt-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+      >
+        <!--<div class="py-4 g-white sm:py-8">-->
+        <!--<div class="px-6 mx-auto max-w-7xl lg:px-8">-->
+        <!--<div class="max-w-2xl mx-auto lg:text-center">-->
+
+        <Category @filterPost="isFilter" />
+        <Conference @filterPostConference="conferenceFilter" />
+        <Group @filterPostGroup="groupFilter" />
+        <SearchPost @search="handleSearch" />
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+      <!--</div>-->
+    </div>
+    <ListPosts :dataPost="posts" :funcGetDataPost=getDataPost />
+  </div>
+</template>
