@@ -1,5 +1,6 @@
 <template>
     <div>
-        События
+        <label>Спикер:</label>
+    
     </div>
 </template>

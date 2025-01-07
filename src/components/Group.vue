@@ -2,7 +2,7 @@
 import { onMounted, ref, defineEmits, onUnmounted } from "vue";
 import axios from "axios";
 
-const emit = defineEmits(["filterPostGroup"]);
+const emit = defineEmits(["filtersGroup"]);
 
 const groups = ref([]);
 
@@ -18,7 +18,7 @@ onMounted(() => {
 
 const filter = (id, index) => {
   isActive.value = index;
-  emit("filterPostGroup", id);
+  emit("filtersGroup", id);
 };
 
 const groupDropdown = ref(false);

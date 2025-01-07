@@ -2,7 +2,7 @@
 import { onMounted, ref, defineEmits, onUnmounted } from "vue";
 import axios from "axios";
 
-const emit = defineEmits(["filterPost"]);
+const emit = defineEmits(["filterCategory"]);
 
 const categories = ref([]);
 
@@ -18,7 +18,7 @@ onMounted(() => {
 
 const filter = (id, index) => {
   isActive.value = index;
-  emit("filterPost", id);
+  emit("filterCategory", id);
 };
 
 const categoryDropdown = ref(false);
@@ -43,10 +43,11 @@ onUnmounted(() => {
 
 <template>
   <div>
+    
     <label id="listbox-label" class="block font-medium text-gray-900 text-sm/6"
       >Спикеры</label
     >
-    
+
     <div class="relative mt-2">
       <button
         @click="dropdownCategory"
@@ -56,9 +57,7 @@ onUnmounted(() => {
         aria-expanded="true"
         aria-labelledby="listbox-label"
       >
-        <span
-          class="flex items-center col-start-1 row-start-1 gap-3 pr-6"
-        >
+        <span class="flex items-center col-start-1 row-start-1 gap-3 pr-6">
           <span class="block truncate">Выбери спикера</span>
         </span>
         <svg
@@ -75,17 +74,6 @@ onUnmounted(() => {
           />
         </svg>
       </button>
-
-      <!--
-        Select popover, show/hide based on select state.
-  
-        Entering: ""
-          From: ""
-          To: ""
-        Leaving: "transition ease-in duration-100"
-          From: "opacity-100"
-          To: "opacity-0"
-      -->
       <ul
         v-show="categoryDropdown"
         class="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-56 ring-1 ring-black/5 focus:outline-none sm:text-sm"
@@ -94,11 +82,6 @@ onUnmounted(() => {
         aria-labelledby="listbox-label"
         aria-activedescendant="listbox-option-3"
       >
-        <!--
-          Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-  
-          Highlighted: "bg-indigo-600 text-white outline-none", Not Highlighted: "text-gray-900"
-        -->
         <li
           :class="{ 'bg-slate-300': isActive == index }"
           v-for="(item, index) in categories"
@@ -113,17 +96,10 @@ onUnmounted(() => {
               alt=""
               class="rounded-full size-5 shrink-0"
             />
-            <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
             <span class="block ml-3 font-normal truncate">{{
               item.title
             }}</span>
           </div>
-
-          <!--
-            Checkmark, only display for selected option.
-  
-            Highlighted: "text-white", Not Highlighted: "text-indigo-600"
-          -->
           <span
             class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
           >
@@ -143,8 +119,6 @@ onUnmounted(() => {
             </svg>
           </span>
         </li>
-
-        <!-- More items... -->
       </ul>
     </div>
   </div>

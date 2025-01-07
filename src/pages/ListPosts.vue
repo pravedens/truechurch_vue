@@ -227,5 +227,3 @@ const close = () => {
     <!-- End Modal -->
   </div>
 </template>
-
-<style></style>

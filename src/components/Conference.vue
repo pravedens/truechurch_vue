@@ -2,7 +2,7 @@
 import { onMounted, ref, defineEmits, onUnmounted } from "vue";
 import axios from "axios";
 
-const emit = defineEmits(["filterPostConference"]);
+const emit = defineEmits(["filtersConference"]);
 
 const conferences = ref([]);
 
@@ -18,7 +18,7 @@ onMounted(() => {
 
 const filterConf = (id, index) => {
   isActive.value = index;
-  emit("filterPostConference", id);
+  emit("filtersConference", id);
 };
 
 const conferenceDropdown = ref(false);
