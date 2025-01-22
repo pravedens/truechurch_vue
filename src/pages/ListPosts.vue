@@ -4,7 +4,7 @@ import Pagination from "../components/Pagination.vue";
 
 const props = defineProps({
   dataPost: Object,
-  funcGetDataPost: Function
+  funcGetDataPost: Function,
 });
 
 const isVisible = ref(false);
@@ -26,54 +26,95 @@ const close = () => {
       <div
         class="max-w-2xl px-4 py-4 mx-auto sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8"
       >
-        <div v-if="dataPost.data?.length > 0"
+        <div
+          v-if="dataPost.data?.length > 0"
           class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
         >
-          <a
+          <div
             @click="showModal(post)"
-            class="relative group"
             v-for="(post, index) in dataPost.data"
             :key="index"
           >
-            <div
-              class="absolute flex items-center justify-between text-xs top-5 gap-x-4 start-1 end-1"
+            <a
+              href="#"
+              class="flex flex-col overflow-hidden transition bg-white border shadow-sm group rounded-xl hover:shadow-lg focus:outline-none focus:shadow-lg dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
             >
-              <p class="text-lg font-bold text-gray-800">{{ post.postDate }}</p>
+              <div
+                class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden"
+              >
+                <img
+                  class="absolute top-0 object-cover transition-transform duration-500 ease-in-out size-full start-0 group-hover:scale-105 group-focus:scale-105 rounded-t-xl"
+                  :src="post.thumbnail"
+                  alt="Card Image"
+                />
+                <div
+                  class="absolute top-0 shadow-lg opacity-50 bg-fuchsia-700 shadow-blue-500/50 start-0 end-0 rounded-xl"
+                >
+                  <div class="p-1 md:p-1">
+                    <h3 class="text-lg text-center text-white">
+                      {{ post.title }}
+                    </h3>
+                  </div>
+                </div>
+              </div>
               <p
-                class="rounded-full px-3 py-1.5 text-lg font-medium text-red-500 hover:bg-gray-100"
+                class="rounded-full px-3 py-1.5 text-lg font-medium text-fuchsia-700"
               >
-                {{ post.category_id }}
+                {{ post.category.title }}
               </p>
+            </a>
+            <div
+              class="flex items-center justify-between px-2 py-1 border-b rounded-t-xl md:px-3 dark:border-neutral-700"
+            >
+              <div class="p-2 sm:px-2">
+                <p class="font-mono text-sm text-gray-500 dark:text-neutral-500">
+                  {{ post.created_at }}
+                </p>
+              </div>
             </div>
+          </div>
 
-            <img
-              :src="post.thumbnail"
-              alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-              class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8] mt-4"
-            />
-            <div class="relative group">
-              <h3
-                class="mt-3 font-semibold text-center text-gray-900 text-lg/6 group-hover:text-gray-600"
-              >
-                <span class="absolute inset-0"></span>
-                {{ post.title }}
-              </h3>
-            </div>
-          </a>
           <!-- More products... -->
         </div>
-        <div v-else class="text-center">
-          <span>Нет данных</span>
+        <div
+          v-else
+          class="flex flex-col bg-white border shadow-sm min-h-60 rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
+        >
+          <div
+            class="flex flex-col items-center justify-center flex-auto p-4 md:p-5"
+          >
+            <svg
+              class="text-gray-500 size-10 dark:text-neutral-500"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="22" x2="2" y1="12" y2="12"></line>
+              <path
+                d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"
+              ></path>
+              <line x1="6" x2="6.01" y1="16" y2="16"></line>
+              <line x1="10" x2="10.01" y1="16" y2="16"></line>
+            </svg>
+            <p class="mt-2 text-sm text-gray-800 dark:text-neutral-300">
+              Данные отсутствуют
+            </p>
+          </div>
         </div>
       </div>
     </div>
     <div>
       <Pagination
-      v-if="dataPost.links?.length > 3"
-      :data="dataPost"
-      :functPost="funcGetDataPost"
-    />
-
+        v-if="dataPost.links?.length > 3"
+        :data="dataPost"
+        :functPost="funcGetDataPost"
+      />
     </div>
 
     <!-- Modal -->
@@ -209,6 +250,7 @@ const close = () => {
                 </div>
               </div>
             </div>
+
             <div
               class="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6"
             >

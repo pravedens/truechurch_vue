@@ -25,6 +25,11 @@ onMounted(async () => {
     //.then(resp => console.log(resp))
     .then((resp) => (groups.value = resp.data.data.data))
     .catch((err) => console.log(err));
+  await axios
+    .get("posts")
+    //.then(resp => console.log(resp))
+    .then((resp) => (posts.value = resp.data.data))
+    .catch((err) => console.log(err));
 });
 
 const handleSearch = async (value) => {
@@ -56,7 +61,6 @@ const applyFilter = async (number = null) => {
 
     // Perform GET request with query parameters
     const response = await axios.get(url, { params });
-    console.log(params);
     posts.value = response.data.data;
   } catch (error) {
     console.error("Error fetching foods:", error);
@@ -93,7 +97,7 @@ const applyFilter = async (number = null) => {
                 <label
                   for="region"
                   class="block font-medium text-gray-900 text-sm/6"
-                  >State / Province</label
+                  >Спикер</label
                 >
                 <div class="mt-2">
                   <select
@@ -105,6 +109,7 @@ const applyFilter = async (number = null) => {
                     v-model="filters.category"
                     @change="applyFilter"
                   >
+                    <option></option>
                     <option
                       v-for="(item, index) in categories"
                       :key="index"
@@ -120,7 +125,7 @@ const applyFilter = async (number = null) => {
                 <label
                   for="region"
                   class="block font-medium text-gray-900 text-sm/6"
-                  >State / Province</label
+                  >Мероприятие</label
                 >
                 <div class="mt-2">
                   <select
@@ -132,6 +137,7 @@ const applyFilter = async (number = null) => {
                     v-model="filters.conference"
                     @change="applyFilter"
                   >
+                    <option></option>
                     <option
                       v-for="(item, index) in conferences"
                       :key="index"
@@ -147,7 +153,7 @@ const applyFilter = async (number = null) => {
                 <label
                   for="region"
                   class="block font-medium text-gray-900 text-sm/6"
-                  >State / Province</label
+                  >Год</label
                 >
                 <div class="mt-2">
                   <select
@@ -159,6 +165,7 @@ const applyFilter = async (number = null) => {
                     v-model="filters.group"
                     @change="applyFilter"
                   >
+                    <option></option>
                     <option
                       v-for="(item, index) in groups"
                       :key="index"
@@ -169,7 +176,6 @@ const applyFilter = async (number = null) => {
                   </select>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

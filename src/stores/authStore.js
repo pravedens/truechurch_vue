@@ -5,6 +5,7 @@ import axios from 'axios'
 export const userAuthStore = defineStore('authStore', () => {
     const user = ref({})
     const token = ref(sessionStorage.getItem('token') ?? null);
+    const cardPost = ref(null);
 
     const saveToken = (newToken) => {
         token.value = newToken;
@@ -30,6 +31,10 @@ export const userAuthStore = defineStore('authStore', () => {
     function changeUser (name) {
         user.value = name;
     }
+
+    const addCard = () => {
+        cardPost.value ++;
+    }
   
-    return { user, isLoggin, changeUser, saveToken, getUser, token, clearToken }
+    return { user, isLoggin, changeUser, saveToken, getUser, token, clearToken, cardPost, addCard }
   })

@@ -38,13 +38,14 @@ onUnmounted(() => {
 });
 
 const handleLogout = () => {
-  axios.post('logout', null)
-    .then(resp => {
+  axios
+    .post("logout", null)
+    .then((resp) => {
       authStore.clearToken();
-      router.push('/')
+      router.push("/");
     })
-    .catch(err => console.log(err))
-}
+    .catch((err) => console.log(err));
+};
 </script>
 
 <template>
@@ -99,6 +100,34 @@ const handleLogout = () => {
           </div>
           <div class="hidden md:block">
             <div class="flex items-center ml-4 md:ml-6">
+              <!-- Like -->
+              <!--<button
+                type="button"
+                class="relative p-3 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              >
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Like</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                  />
+                </svg>
+                <div v-if="authStore.cardPost > 0"
+                  class="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full bottom-2 left-5"
+                >
+                  {{ authStore.cardPost }}
+                </div>
+              </button>-->
+              <!--End Like-->
               <button
                 type="button"
                 class="relative p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -138,7 +167,7 @@ const handleLogout = () => {
                       <span class="sr-only">Open user menu</span>
                       <img
                         class="rounded-full size-8"
-                        :src=" authStore.user.photo_profile"
+                        :src="authStore.user.photo_profile"
                         alt=""
                       />
                     </button>
@@ -146,7 +175,8 @@ const handleLogout = () => {
                       {{ authStore.user.name }}
                     </div>
                     <div
-                      v-show="userDropdown" @click.stop
+                      v-show="userDropdown"
+                      @click.stop
                       class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
@@ -170,7 +200,8 @@ const handleLogout = () => {
                         id="user-menu-item-1"
                         >Settings</a
                       >
-                      <a @click="handleLogout"
+                      <a
+                        @click="handleLogout"
                         class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                         role="menuitem"
                         tabindex="-1"

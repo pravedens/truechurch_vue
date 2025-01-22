@@ -4,14 +4,22 @@
     <div>
       <label>Спикер:</label>
       <select v-model="filters.category" @change="isFilter">
-        <option v-for="(item, index) in categories" :key="index" :value="item.id">
+        <option
+          v-for="(item, index) in categories"
+          :key="index"
+          :value="item.id"
+        >
           {{ item.title }}
         </option>
       </select>
 
       <label>Мероприятия:</label>
       <select v-model="filters.conference" @change="isFilter">
-        <option v-for="(item, index) in conferences" :key="index" :value="item.id">
+        <option
+          v-for="(item, index) in conferences"
+          :key="index"
+          :value="item.id"
+        >
           {{ item.title }}
         </option>
       </select>
@@ -56,6 +64,11 @@ onMounted(async () => {
     //.then(resp => console.log(resp))
     .then((resp) => (groups.value = resp.data.data.data))
     .catch((err) => console.log(err));
+    await axios
+    .get("posts")
+    //.then(resp => console.log(resp))
+    .then((resp) => (posts.value = resp.data.data.data))
+    .catch((err) => console.log(err));
 });
 
 const filters = ref({
@@ -77,7 +90,6 @@ const isFilter = async () => {
 
     // Perform GET request with query parameters
     const response = await axios.get("posts", { params });
-    console.log(params);
     posts.value = response.data.data.data;
   } catch (error) {
     console.error("Error fetching foods:", error);
